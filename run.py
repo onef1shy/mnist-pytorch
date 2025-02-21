@@ -31,6 +31,9 @@ test_data_size = len(test_data)
 print(f"Train data size: {train_data_size}")
 print(f"Test data size: {test_data_size}")
 
+# 创建可视化文件夹
+VIS_PATH = "./MNIST/visualizations/"
+os.makedirs(VIS_PATH, exist_ok=True)
 
 class MnistModel(nn.Module):
     def __init__(self):
@@ -66,6 +69,29 @@ model = MnistModel()
 criterion = CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
+def visualize_dataset_samples():
+    """可视化数据集中的示例数字"""
+    # 为每个数字找到一个示例
+    examples = {}
+    for images, labels in train_loader:
+        for img, label in zip(images, labels):
+            if label.item() not in examples and len(examples) < 10:
+                examples[label.item()] = img
+        if len(examples) == 10:
+            break
+    
+    # 创建图表
+    fig = plt.figure(figsize=(15, 3))
+    for i in range(10):
+        ax = fig.add_subplot(1, 10, i + 1)
+        img = examples[i].squeeze().numpy()
+        ax.imshow(img, cmap='gray')
+        ax.axis('off')
+        ax.set_title(f'Digit: {i}')
+    
+    plt.savefig(os.path.join(VIS_PATH, 'dataset_samples.png'))
+    plt.close()
+    print("Dataset samples visualization saved")
 
 def train(model, train_loader, criterion, optimizer):
     # 创建结果文件夹
@@ -96,7 +122,6 @@ def train(model, train_loader, criterion, optimizer):
                 if index % 100 == 0:
                     print(f"Epoch {epoch}, Step {index}, Loss: {loss.item()}")
                     writer.writerow([epoch, index, loss.item()])
-                    # 记录损失值
                     losses.append(loss.item())
                     epochs.append(epoch)
                     steps.append(index)
@@ -109,7 +134,7 @@ def train(model, train_loader, criterion, optimizer):
     plt.ylabel('Loss')
     plt.legend()
     plt.grid(True)
-    plt.savefig(os.path.join(results_path, f'training_loss_{timestamp}.png'))
+    plt.savefig(os.path.join(VIS_PATH, f'training_loss_{timestamp}.png'))
     plt.close()
     
     save_path = "./MNIST/model/"
@@ -125,8 +150,6 @@ def train(model, train_loader, criterion, optimizer):
 def visualize_predictions(model, test_loader, num_images=10):
     """可视化模型预测结果"""
     model.eval()
-    results_path = "./MNIST/results/"
-    os.makedirs(results_path, exist_ok=True)
     
     # 获取一批数据
     dataiter = iter(test_loader)
@@ -148,7 +171,7 @@ def visualize_predictions(model, test_loader, num_images=10):
                     color=('green' if predicted[idx] == labels[idx] else 'red'))
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    plt.savefig(os.path.join(results_path, f'predictions_{timestamp}.png'))
+    plt.savefig(os.path.join(VIS_PATH, f'predictions_{timestamp}.png'))
     plt.close()
 
 
@@ -197,12 +220,17 @@ def test(model, test_loader):
     plt.ylim(0, 100)
     for i, acc in enumerate(class_accuracy):
         plt.text(i, acc, f'{acc:.1f}%', ha='center', va='bottom')
-    plt.savefig(os.path.join(results_path, f'class_accuracy_{timestamp}.png'))
+    plt.savefig(os.path.join(VIS_PATH, f'class_accuracy_{timestamp}.png'))
     plt.close()
 
 
 if __name__ == "__main__":
+    # 可视化数据集示例
+    visualize_dataset_samples()
+    
+    # 训练和测试模型
     train(model, train_loader, criterion, optimizer)
     test(model, test_loader)
-    # 可视化一些预测结果
+    
+    # 可视化预测结果
     visualize_predictions(model, test_loader)
