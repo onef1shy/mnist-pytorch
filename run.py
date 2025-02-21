@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from PIL import Image
 import torch
 import torch.nn as nn
 import os
@@ -9,8 +8,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader
-from datetime import datetime
-import numpy as np
+
 
 transform = transforms.Compose([
     transforms.ToTensor(),
