@@ -59,23 +59,28 @@ python run.py
 项目包含多种可视化功能，所有可视化结果保存在 `visualizations` 目录下：
 
 1. 数据集示例（`dataset_samples.png`）
-   - 展示数据集中的0-9数字示例
-   - 帮助理解输入数据的形式
+   - 展示数据集中的0-9数字示例，每个数字清晰可见
+   - 采用2行5列的布局展示
+   - 帮助直观理解输入数据的形式
 
-2. 训练过程（`training_loss_[timestamp].png`）
-   - 显示训练过程中损失值的变化
+2. 训练过程（`training_loss.png`）
+   - 显示训练过程中损失值的变化趋势
+   - 包含清晰的坐标轴标签和图例
    - 帮助监控模型训练的收敛情况
 
-3. 预测结果（`predictions_[timestamp].png`）
+3. 预测结果（`predictions.png`）
    - 展示模型对测试集图像的预测结果
+   - 采用2行5列的布局展示10个预测样例
    - 正确预测显示为绿色，错误预测显示为红色
+   - 同时显示预测值和真实值
 
-4. 分类准确率（`class_accuracy_[timestamp].png`）
+4. 分类准确率（`class_accuracy.png`）
    - 展示模型对每个数字（0-9）的识别准确率
-   - 包含具体的准确率数值
+   - 使用柱状图直观显示每个数字的识别效果
+   - 包含具体的准确率数值标注
 
 ## 结果保存
 
-- 训练结果保存在 `results/training_results_[timestamp].csv`
-- 测试结果保存在 `results/test_results_[timestamp].csv`
-- 模型保存在 `model/model.pth` 
+- 训练过程数据保存在 `results/training_results.csv`
+- 测试结果数据保存在 `results/test_results.csv`
+- 训练好的模型保存在 `model/model.pth` 
