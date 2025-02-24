@@ -2,8 +2,6 @@
 
 这是一个使用PyTorch实现的MNIST手写数字识别项目。该项目使用卷积神经网络(CNN)来识别手写数字，实现了99.23%的识别准确率。
 
-如果这个项目对你有帮助，欢迎点个 ⭐Star 支持一下！你的认可是我持续创作的最大动力 ✨
-
 ## 项目结构
 
 ```
@@ -90,6 +88,8 @@ python run.py
 ## License
 
 MIT License © [Iamb1yat](https://github.com/Iamb1yat)
+
+## 支持
 
 欢迎 Fork 和 Star ⭐，也欢迎提出建议和 PR～
 
