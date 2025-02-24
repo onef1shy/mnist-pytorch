@@ -2,6 +2,8 @@
 
 这是一个使用PyTorch实现的MNIST手写数字识别项目。该项目使用卷积神经网络(CNN)来识别手写数字，实现了99.23%的识别准确率。
 
+如果这个项目对你有帮助，欢迎点个 ⭐Star 支持一下！你的认可是我持续创作的最大动力 ✨
+
 ## 项目结构
 
 ```
@@ -83,4 +85,14 @@ python run.py
 
 - 训练过程数据保存在 `results/training_results.csv`
 - 测试结果数据保存在 `results/test_results.csv`
-- 训练好的模型保存在 `model/model.pth` 
+- 训练好的模型保存在 `model/model.pth`
+
+## License
+
+MIT License © [Iamb1yat](https://github.com/Iamb1yat)
+
+欢迎 Fork 和 Star ⭐，也欢迎提出建议和 PR～
+
+---
+
+> 🤖 如果你基于这个项目做出了有趣的改进，别忘了分享给我，让我们一起提升技术～ 
