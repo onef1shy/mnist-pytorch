@@ -87,7 +87,7 @@ python run.py
 
 ## License
 
-MIT License © [Iamb1yat](https://github.com/Iamb1yat)
+MIT License © [onefishy](https://github.com/onef1shy)
 
 ## 支持
 
